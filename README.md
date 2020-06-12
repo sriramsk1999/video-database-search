@@ -1,4 +1,9 @@
-Image Captioning
+## Video Database Search
+
+A tool to search a raw video database through natural language queries.
+
+
+#### Image Captioning
 
 download_coco.py - downloads the images and the captions (MS-COCO)
 
@@ -8,6 +13,7 @@ models.py - Contains definitions for the encoder and decoder models
 
 gen_caption.py - evaluate image captioner with a test image
 
+----------
 
 annotations - captions for images
 
@@ -17,7 +23,7 @@ train2017 - images
 
 
 
-Video Captioning
+#### Video Captioning
 
 download videos -> ?
 
@@ -27,7 +33,7 @@ detect_scene_multiple.py - segment the downloaded videos into chunks
 
 caption_videos.py - uses the chunks in specified lcoations to generate a json file of captions for each chunk
 
-
+----------
 
 
 impapp/impapp.py - flask web app
