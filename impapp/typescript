@@ -1,0 +1,514 @@
+Script started on 2020-03-26 16:07:33+0000
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ endscript
+
+Command 'endscript' not found, did you mean:
+
+  command 'enscript' from deb enscript
+
+Try: sudo apt install <deb name>
+
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ opusded[Kc
+Usage: opusdec [options] input_file.opus [output_file]
+
+Decodes a Opus file and produce a WAV file or raw file
+
+input_file can be:
+  filename.opus        regular Opus file
+  -                    stdin
+
+output_file can be:
+  filename.wav         Wav file
+  filename.*           Raw PCM file (any extension other than .wav)
+  -                    stdout (raw; unless --force-wav)
+  (nothing)            Will be played to soundcard
+
+Options:
+ --rate n              Force decoding at sampling rate n Hz
+ --gain n              Manually adjust gain by n.nn dB (0 default)
+ --no-dither           Do not dither 16-bit output
+ --float               32-bit floating-point output
+ --force-wav           Force wav header on output
+ --packet-loss n       Simulate n % random packet loss
+ --save-range file     Saves check values for every frame to a file
+ -h, --help            This help
+ -V, --version         Version information
+ --quiet               Quiet mode
+
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py 
+[?1049h[22;0;0t[1;54r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[52;46H(B[0;7m[ Reading File ](B[m[52;45H(B[0;7m[ Read 28 lines ](B[m[H(B[0;7m  GNU nano 2.9.3                                   impapp.py                                              [1;105H(B[m[53d(B[0;7m^G(B[m Get Help    (B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54d(B[0;7m^X(B[m Exit[54;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[3d(B[0;1m[36mimport[39m(B[m speech_recognition (B[0;1m[36mas[39m(B[m sr[4d(B[0;1m[36mfrom[39m(B[m flask (B[0;1m[36mimport[39m(B[m Flask, render_template, request[6dapp = Flask(__name__)[8d@app.route((B[0;1m[32m'/'[39m(B[m)[9d@app.route((B[0;1m[32m'/index.html'[39m(B[m)[10d(B[0;1m[36mdef[34m index[39m(B[m():[11;5H(B[0;1m[36mreturn[39m(B[m render_template((B[0;1m[32m'index.html'[39m(B[m)[13d@app.route((B[0;1m[32m'/speech2text'[39m(B[m, methods=[(B[0;1m[32m'POST'[39m(B[m])[14d(B[0;1m[36mdef[34m speech2text[39m(B[m():[15;5Hr = sr.Recognizer()[17;5Haudio = request.get_data()[19;5H(B[0;1m[36mwith[39m(B[m open((B[0;1m[32m'tempo.ogg'[39m(B[m, mode=(B[0;1m[32m'bx'[39m(B[m) (B[0;1m[36mas[39m(B[m f:[20;9Hf.write(audio)[22;5Haudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[23;5H(B[0;1m[36mwith[39m(B[m audiofile (B[0;1m[36mas[39m(B[m source:[24;9Haudio = r.record(source)[26;5Htext = r.recognize_google(audio,show_all=(B[0;1m[35mTrue[39m(B[m)[27;5H(B[0;1m[36mprint[39m(B[m(text)[28;5H(B[0;1m[36mreturn[39m(B[m (B[0;1m[32m'message received'[30d[39m(B[mapp.run(host=(B[0;1m[32m'0.0.0.0'[39m(B[m,debug=(B[0;1m[35mTrue[39m(B[m)[3d[?12l[?25h[?25l[1;97H(B[0;7mModified(B[m7[2;51r8[2dM[1;54r[4;1H[?12l[?25h[?25l[A[?12l[?25h[?25l[?12l[?25h[?25li[?12l[?25h[?25lm[?12l[?25h[?25lp[?12l[?25h[?25lo[?12l[?25h[?25lr[?12l[?25h[?25l(B[0;1m[36mimport[39m(B[m[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l o[?12l[?25h[?25ls[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7;10H[?12l[?25h[?25l[8d[?12l[?25h[?25l[9;10H[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14;10H[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[52d[K[17d[?12l[?25h[?25l[18;10H[?12l[?25h[?25l[19d[?12l[?25h[?25l[20;10H[?12l[?25h[?25l[21d[?12l[?25h[?25l[22d[?12l[?25h[?25l7[22;52r8M[1;54r[23;1H[?12l[?25h[?25l[22;52r[22;1HM[1;54r[24;1H[?12l[?25h[?25l[A[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l    o[?12l[?25h[?25ls[?12l[?25h[?25l.[?12l[?25h[?25ls[?12l[?25h[?25ly[?12l[?25h[?25ls[?12l[?25h[?25lt[?12l[?25h[?25le[?12l[?25h[?25lm[?12l[?25h[?25l([?12l[?25h[?25l)[?12l[?25h[?25l[?12l[?25h[?25l')[?12l[?25h[?25l'')[?12l[?25h[?25l[?12l[?25h[?25l(B[0;1m[32m'opusdec --force-wav tempo.ogg - | sox - file.wav'[39m(B[m)[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[1P[?12l[?25h[?25l[1P[?12l[?25h[?25l[1P[?12l[?25h[?25l[1P[?12l[?25h[?25l(B[0;1m[32mt.wav'[39m(B[m)[57G[?12l[?25h[?25l(B[0;1m[32me.wav'[39m(B[m)[58G[?12l[?25h[?25l(B[0;1m[32mm.wav'[39m(B[m)[59G[?12l[?25h[?25l(B[0;1m[32mp.wav'[39m(B[m)[60G[?12l[?25h[?25l(B[0;1m[32mo.wav'[39m(B[m)[61G[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[53;16H           (B[0;7mM-D(B[m DOS Format            (B[0;7mM-A(B[m Append[16X[53;79H(B[0;7mM-B(B[m Backup File[K[54;2H(B[0;7mC(B[m Cancel[16G           (B[0;7mM-M(B[m Mac Format            (B[0;7mM-P(B[m Prepend[15X[54;79H(B[0;7m^T(B[m To Files[K[52d(B[0;7mFile Name to Write: impapp.py                                                                             [52;1H(B[m[52;30H[?12l[?25h[?25l[K[1;105H[1;97H(B[0;7m        (B[m[52;45H(B[0;7m[ Wrote 31 lines ](B[m[53;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54;2H(B[0;7mX(B[m Exit  [16G(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[23;59H[?12l[?25h[?25l[52d[J[54;106H[?12l[?25h[54;1H[?1049l[23;0;0t[?1l>]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ sox
+
+Command 'sox' not found, but can be installed with:
+
+sudo apt install sox
+
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ so[K[Ksudo apt isntall sox[K[K[K[K[K[K[K[K[K[Knstall sox
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+The following additional packages will be installed:
+  libgsm1 libltdl7 libopencore-amrnb0 libopencore-amrwb0 libsox-fmt-alsa libsox-fmt-base libsox3
+  libvorbisfile3 libwavpack1
+Suggested packages:
+  libsox-fmt-all
+The following NEW packages will be installed:
+  libgsm1 libltdl7 libopencore-amrnb0 libopencore-amrwb0 libsox-fmt-alsa libsox-fmt-base libsox3
+  libvorbisfile3 libwavpack1 sox
+0 upgraded, 10 newly installed, 0 to remove and 3 not upgraded.
+Need to get 661 kB of archives.
+After this operation, 2260 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+[33m0% [Working][0m            Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 libopencore-amrnb0 amd64 0.1.3-2.1 [92.0 kB]
+[33m0% [1 libopencore-amrnb0 0 B/92.0 kB 0%][0m[33m                                        13% [Working][0m             Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 libopencore-amrwb0 amd64 0.1.3-2.1 [45.8 kB]
+[33m13% [2 libopencore-amrwb0 0 B/45.8 kB 0%][0m[33m                                         21% [Working][0m             Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/universe amd64 libgsm1 amd64 1.0.13-4build1 [22.4 kB]
+[33m21% [3 libgsm1 0 B/22.4 kB 0%][0m[33m                              25% [Working][0m             Get:4 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libltdl7 amd64 2.4.6-2 [38.8 kB]
+[33m25% [4 libltdl7 0 B/38.8 kB 0%][0m[33m                               32% [Working][0m             Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 libsox3 amd64 14.4.2-3ubuntu0.18.04.1 [226 kB]
+[33m32% [5 libsox3 0 B/226 kB 0%][0m[33m                             61% [Working][0m             Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 libsox-fmt-alsa amd64 14.4.2-3ubuntu0.18.04.1 [10.6 kB]
+[33m61% [6 libsox-fmt-alsa 0 B/10.6 kB 0%][0m[33m                                      65% [Working][0m             Get:7 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic/main amd64 libvorbisfile3 amd64 1.3.5-4.2 [16.0 kB]
+[33m65% [7 libvorbisfile3 0 B/16.0 kB 0%][0m[33m                                     69% [Working][0m             Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/main amd64 libwavpack1 amd64 5.1.0-2ubuntu1.4 [76.6 kB]
+[33m69% [8 libwavpack1 0 B/76.6 kB 0%][0m[33m                                  80% [Working][0m             Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 libsox-fmt-base amd64 14.4.2-3ubuntu0.18.04.1 [32.1 kB]
+[33m80% [9 libsox-fmt-base 0 B/32.1 kB 0%][0m[33m                                      86% [Working][0m             Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu bionic-updates/universe amd64 sox amd64 14.4.2-3ubuntu0.18.04.1 [101 kB]
+[33m86% [10 sox 0 B/101 kB 0%][0m[33m                          100% [Working][0m              Fetched 661 kB in 0s (12.7 MB/s)
+
+7[0;53r8[1ASelecting previously unselected package libopencore-amrnb0:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 64793 files and directories currently installed.)
+Preparing to unpack .../0-libopencore-amrnb0_0.1.3-2.1_amd64.deb ...
+7[54;0f[42m[30mProgress: [  0%][49m[39m [....................................................................................] 87[54;0f[42m[30mProgress: [  2%][49m[39m [#...................................................................................] 8Unpacking libopencore-amrnb0:amd64 (0.1.3-2.1) ...
+7[54;0f[42m[30mProgress: [  4%][49m[39m [###.................................................................................] 87[54;0f[42m[30mProgress: [  6%][49m[39m [####................................................................................] 8Selecting previously unselected package libopencore-amrwb0:amd64.
+Preparing to unpack .../1-libopencore-amrwb0_0.1.3-2.1_amd64.deb ...
+7[54;0f[42m[30mProgress: [  8%][49m[39m [######..............................................................................] 8Unpacking libopencore-amrwb0:amd64 (0.1.3-2.1) ...
+7[54;0f[42m[30mProgress: [ 10%][49m[39m [########............................................................................] 87[54;0f[42m[30mProgress: [ 12%][49m[39m [#########...........................................................................] 8Selecting previously unselected package libgsm1:amd64.
+Preparing to unpack .../2-libgsm1_1.0.13-4build1_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 14%][49m[39m [###########.........................................................................] 8Unpacking libgsm1:amd64 (1.0.13-4build1) ...
+7[54;0f[42m[30mProgress: [ 16%][49m[39m [#############.......................................................................] 87[54;0f[42m[30mProgress: [ 18%][49m[39m [##############......................................................................] 8Selecting previously unselected package libltdl7:amd64.
+Preparing to unpack .../3-libltdl7_2.4.6-2_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 20%][49m[39m [################....................................................................] 8Unpacking libltdl7:amd64 (2.4.6-2) ...
+7[54;0f[42m[30mProgress: [ 22%][49m[39m [##################..................................................................] 87[54;0f[42m[30mProgress: [ 24%][49m[39m [###################.................................................................] 8Selecting previously unselected package libsox3:amd64.
+Preparing to unpack .../4-libsox3_14.4.2-3ubuntu0.18.04.1_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 25%][49m[39m [#####################...............................................................] 8Unpacking libsox3:amd64 (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 27%][49m[39m [#######################.............................................................] 87[54;0f[42m[30mProgress: [ 29%][49m[39m [########################............................................................] 8Selecting previously unselected package libsox-fmt-alsa:amd64.
+Preparing to unpack .../5-libsox-fmt-alsa_14.4.2-3ubuntu0.18.04.1_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 31%][49m[39m [##########################..........................................................] 8Unpacking libsox-fmt-alsa:amd64 (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 33%][49m[39m [###########################.........................................................] 87[54;0f[42m[30mProgress: [ 35%][49m[39m [#############################.......................................................] 8Selecting previously unselected package libvorbisfile3:amd64.
+Preparing to unpack .../6-libvorbisfile3_1.3.5-4.2_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 37%][49m[39m [###############################.....................................................] 8Unpacking libvorbisfile3:amd64 (1.3.5-4.2) ...
+7[54;0f[42m[30mProgress: [ 39%][49m[39m [################################....................................................] 87[54;0f[42m[30mProgress: [ 41%][49m[39m [##################################..................................................] 8Selecting previously unselected package libwavpack1:amd64.
+Preparing to unpack .../7-libwavpack1_5.1.0-2ubuntu1.4_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 43%][49m[39m [####################################................................................] 8Unpacking libwavpack1:amd64 (5.1.0-2ubuntu1.4) ...
+7[54;0f[42m[30mProgress: [ 45%][49m[39m [#####################################...............................................] 87[54;0f[42m[30mProgress: [ 47%][49m[39m [#######################################.............................................] 8Selecting previously unselected package libsox-fmt-base:amd64.
+Preparing to unpack .../8-libsox-fmt-base_14.4.2-3ubuntu0.18.04.1_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 49%][49m[39m [#########################################...........................................] 8Unpacking libsox-fmt-base:amd64 (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 51%][49m[39m [##########################################..........................................] 87[54;0f[42m[30mProgress: [ 53%][49m[39m [############################################........................................] 8Selecting previously unselected package sox.
+Preparing to unpack .../9-sox_14.4.2-3ubuntu0.18.04.1_amd64.deb ...
+7[54;0f[42m[30mProgress: [ 55%][49m[39m [##############################################......................................] 8Unpacking sox (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 57%][49m[39m [###############################################.....................................] 87[54;0f[42m[30mProgress: [ 59%][49m[39m [#################################################...................................] 8Setting up libvorbisfile3:amd64 (1.3.5-4.2) ...
+7[54;0f[42m[30mProgress: [ 61%][49m[39m [###################################################.................................] 87[54;0f[42m[30mProgress: [ 63%][49m[39m [####################################################................................] 8Setting up libwavpack1:amd64 (5.1.0-2ubuntu1.4) ...
+7[54;0f[42m[30mProgress: [ 65%][49m[39m [######################################################..............................] 87[54;0f[42m[30mProgress: [ 67%][49m[39m [#######################################################.............................] 8Setting up libltdl7:amd64 (2.4.6-2) ...
+7[54;0f[42m[30mProgress: [ 69%][49m[39m [#########################################################...........................] 87[54;0f[42m[30mProgress: [ 71%][49m[39m [###########################################################.........................] 8Setting up libopencore-amrnb0:amd64 (0.1.3-2.1) ...
+7[54;0f[42m[30mProgress: [ 73%][49m[39m [############################################################........................] 87[54;0f[42m[30mProgress: [ 75%][49m[39m [##############################################################......................] 8Setting up libopencore-amrwb0:amd64 (0.1.3-2.1) ...
+7[54;0f[42m[30mProgress: [ 76%][49m[39m [################################################################....................] 87[54;0f[42m[30mProgress: [ 78%][49m[39m [#################################################################...................] 8Setting up libgsm1:amd64 (1.0.13-4build1) ...
+7[54;0f[42m[30mProgress: [ 80%][49m[39m [###################################################################.................] 87[54;0f[42m[30mProgress: [ 82%][49m[39m [#####################################################################...............] 8Setting up libsox3:amd64 (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 84%][49m[39m [######################################################################..............] 87[54;0f[42m[30mProgress: [ 86%][49m[39m [########################################################################............] 8Setting up libsox-fmt-base:amd64 (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 88%][49m[39m [##########################################################################..........] 87[54;0f[42m[30mProgress: [ 90%][49m[39m [###########################################################################.........] 8Setting up libsox-fmt-alsa:amd64 (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 92%][49m[39m [#############################################################################.......] 87[54;0f[42m[30mProgress: [ 94%][49m[39m [###############################################################################.....] 8Setting up sox (14.4.2-3ubuntu0.18.04.1) ...
+7[54;0f[42m[30mProgress: [ 96%][49m[39m [################################################################################....] 87[54;0f[42m[30mProgress: [ 98%][49m[39m [##################################################################################..] 8Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Processing triggers for mime-support (3.60ubuntu1) ...
+
+7[0;54r8[1A[J]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ sox
+sox:      SoX v14.4.2
+
+sox FAIL sox: Not enough input filenames specified
+
+Usage summary: [gopts] [[fopts] infile]... [fopts] outfile [effect [effopt]]...
+
+SPECIAL FILENAMES (infile, outfile):
+-                        Pipe/redirect input/output (stdin/stdout); may need -t
+-d, --default-device     Use the default audio device (where available)
+-n, --null               Use the `null' file handler; e.g. with synth effect
+-p, --sox-pipe           Alias for `-t sox -'
+
+SPECIAL FILENAMES (infile only):
+"|program [options] ..." Pipe input from external program (where supported)
+http://server/file       Use the given URL as input file (where supported)
+
+GLOBAL OPTIONS (gopts) (can be specified at any point before the first effect):
+--buffer BYTES           Set the size of all processing buffers (default 8192)
+--clobber                Don't prompt to overwrite output file (default)
+--combine concatenate    Concatenate all input files (default for sox, rec)
+--combine sequence       Sequence all input files (default for play)
+-D, --no-dither          Don't dither automatically
+--dft-min NUM            Minimum size (log2) for DFT processing (default 10)
+--effects-file FILENAME  File containing effects and options
+-G, --guard              Use temporary files to guard against clipping
+-h, --help               Display version number and usage information
+--help-effect NAME       Show usage of effect NAME, or NAME=all for all
+--help-format NAME       Show info on format NAME, or NAME=all for all
+--i, --info              Behave as soxi(1)
+--input-buffer BYTES     Override the input buffer size (default: as --buffer)
+--no-clobber             Prompt to overwrite output file
+-m, --combine mix        Mix multiple input files (instead of concatenating)
+--combine mix-power      Mix to equal power (instead of concatenating)
+-M, --combine merge      Merge multiple input files (instead of concatenating)
+--magic                  Use `magic' file-type detection
+--multi-threaded         Enable parallel effects channels processing
+--norm                   Guard (see --guard) & normalise
+--play-rate-arg ARG      Default `rate' argument for auto-resample with `play'
+--plot gnuplot|octave    Generate script to plot response of filter effect
+-q, --no-show-progress   Run in quiet mode; opposite of -S
+--replay-gain track|album|off  Default: off (sox, rec), track (play)
+-R                       Use default random numbers (same on each run of SoX)
+-S, --show-progress      Display progress while processing audio data
+--single-threaded        Disable parallel effects channels processing
+--temp DIRECTORY         Specify the directory to use for temporary files
+-T, --combine multiply   Multiply samples of corresponding channels from all
+                         input files (instead of concatenating)
+--version                Display version number of SoX and exit
+-V[LEVEL]                Increment or set verbosity level (default 2); levels:
+                           1: failure messages
+                           2: warnings
+                           3: details of processing
+                           4-6: increasing levels of debug messages
+FORMAT OPTIONS (fopts):
+Input file format options need only be supplied for files that are headerless.
+Output files will have the same format as the input file where possible and not
+overridden by any of various means including providing output format options.
+
+-v|--volume FACTOR       Input file volume adjustment factor (real number)
+--ignore-length          Ignore input file length given in header; read to EOF
+-t|--type FILETYPE       File type of audio
+-e|--encoding ENCODING   Set encoding (ENCODING may be one of signed-integer,
+                         unsigned-integer, floating-point, mu-law, a-law,
+                         ima-adpcm, ms-adpcm, gsm-full-rate)
+-b|--bits BITS           Encoded sample size in bits
+-N|--reverse-nibbles     Encoded nibble-order
+-X|--reverse-bits        Encoded bit-order
+--endian little|big|swap Encoded byte-order; swap means opposite to default
+-L/-B/-x                 Short options for the above
+-c|--channels CHANNELS   Number of channels of audio data; e.g. 2 = stereo
+-r|--rate RATE           Sample rate of audio
+-C|--compression FACTOR  Compression factor for output format
+--add-comment TEXT       Append output file comment
+--comment TEXT           Specify comment text for the output file
+--comment-file FILENAME  File containing comment text for the output file
+--no-glob                Don't `glob' wildcard match the following filename
+
+AUDIO FILE FORMATS: 8svx aif aifc aiff aiffc al amb amr-nb amr-wb anb au avr awb caf cdda cdr cvs cvsd cvu dat dvms f32 f4 f64 f8 fap flac fssd gsm gsrt hcom htk ima ircam la lpc lpc10 lu mat mat4 mat5 maud nist ogg paf prc pvf raw s1 s16 s2 s24 s3 s32 s4 s8 sb sd2 sds sf sl sln smp snd sndfile sndr sndt sou sox sph sw txw u1 u16 u2 u24 u3 u32 u4 u8 ub ul uw vms voc vorbis vox w64 wav wavpcm wv wve xa xi
+PLAYLIST FORMATS: m3u pls
+AUDIO DEVICE DRIVERS: alsa
+
+EFFECTS: allpass band bandpass bandreject bass bend biquad chorus channels compand contrast dcshift deemph delay dither divide+ downsample earwax echo echos equalizer fade fir firfit+ flanger gain highpass hilbert input# ladspa loudness lowpass mcompand noiseprof noisered norm oops output# overdrive pad phaser pitch rate remix repeat reverb reverse riaa silence sinc spectrogram speed splice stat stats stretch swap synth tempo treble tremolo trim upsample vad vol
+  * Deprecated effect    + Experimental effect    # LibSoX-only effect
+EFFECT OPTIONS (effopts): effect dependent; see --help-effect
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py 
+[?1049h[22;0;0t[1;54r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[52;46H(B[0;7m[ Reading File ](B[m[52;45H(B[0;7m[ Read 31 lines ](B[m[H(B[0;7m  GNU nano 2.9.3                                   impapp.py                                              [1;105H(B[m[53d(B[0;7m^G(B[m Get Help    (B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54d(B[0;7m^X(B[m Exit[54;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[3d(B[0;1m[36mimport[39m(B[m os[4d(B[0;1m[36mimport[39m(B[m speech_recognition (B[0;1m[36mas[39m(B[m sr[5d(B[0;1m[36mfrom[39m(B[m flask (B[0;1m[36mimport[39m(B[m Flask, render_template, request[7dapp = Flask(__name__)[9d@app.route((B[0;1m[32m'/'[39m(B[m)[10d@app.route((B[0;1m[32m'/index.html'[39m(B[m)[11d(B[0;1m[36mdef[34m index[39m(B[m():[12;5H(B[0;1m[36mreturn[39m(B[m render_template((B[0;1m[32m'index.html'[39m(B[m)[14d@app.route((B[0;1m[32m'/speech2text'[39m(B[m, methods=[(B[0;1m[32m'POST'[39m(B[m])[15d(B[0;1m[36mdef[34m speech2text[39m(B[m():[16;5Hr = sr.Recognizer()[18;5Haudio = request.get_data()[20;5H(B[0;1m[36mwith[39m(B[m open((B[0;1m[32m'tempo.ogg'[39m(B[m, mode=(B[0;1m[32m'bx'[39m(B[m) (B[0;1m[36mas[39m(B[m f:[21;9Hf.write(audio)[23;5Hos.system((B[0;1m[32m'opusdec --force-wav tempo.ogg - | sox - tempo.wav'[39m(B[m)[25;5Haudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[26;5H(B[0;1m[36mwith[39m(B[m audiofile (B[0;1m[36mas[39m(B[m source:[27;9Haudio = r.record(source)[29;5Htext = r.recognize_google(audio,show_all=(B[0;1m[35mTrue[39m(B[m)[30;5H(B[0;1m[36mprint[39m(B[m(text)[31;5H(B[0;1m[36mreturn[39m(B[m (B[0;1m[32m'message received'[33d[39m(B[mapp.run(host=(B[0;1m[32m'0.0.0.0'[39m(B[m,debug=(B[0;1m[35mTrue[39m(B[m)[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[19d[?12l[?25h[?25l[20d[?12l[?25h[?25l[21d[?12l[?25h[?25l[22d[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[1;97H(B[0;7mModified(B[m[24;51r[51;1H
+[1;54r[23;67H[?12l[?25h[?25l[24;42H[?12l[?25h[?25l[25;30H[?12l[?25h[?25l[26;33H[?12l[?25h[?25l[52d[K[27d[?12l[?25h[?25l[28;51H[?12l[?25h[?25l[?12l[?25h[?25lTru)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l)[K[?12l[?25h[?25l[29;16H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[5Gprin[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m    [49m(B[m[K[?12l[?25h[?25l[K[?12l[?25h[?25l[29;52r[52;1H
+[1;54r[28;37H[?12l[?25h[?25l[29;30H[?12l[?25h[?25l[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m[K[?12l[?25h[?25l''[K[?12l[?25h[?25l [?12l[?25h[?25l'[?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l t[?12l[?25h[?25le[?12l[?25h[?25lx[?12l[?25h[?25lt[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[28;37H[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25lo[?12l[?25h[?25l)[?12l[?25h[?25l7[29;52r8[29dM[1;54r[29;1H[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l    o[?12l[?25h[?25ls[?12l[?25h[?25l.[?12l[?25h[?25ls[?12l[?25h[?25ly[?12l[?25h[?25ls[?12l[?25h[?25lt[?12l[?25h[?25le[?12l[?25h[?25lm[?12l[?25h[?25l([?12l[?25h[?25l)[?12l[?25h[?25l[?12l[?25h[?25l')[?12l[?25h[?25l'')[?12l[?25h[?25l[?12l[?25h[?25l(B[0;1m[32m'r'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mm'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32m '[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mt'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32me'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mm'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mp'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mo'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32m.'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mo'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mg'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mgg'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32m '[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mt'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32me'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mm'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mp'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mo'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32m.'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mw'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32ma'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32ms'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mv'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m)[K[?12l[?25h[?25l(B[0;1m[32m'[39m(B[m)[K[?12l[?25h[?25l(B[0;1m[32mv'[39m(B[m)[?12l[?25h[?25l[53;16H           (B[0;7mM-D(B[m DOS Format            (B[0;7mM-A(B[m Append[16X[53;79H(B[0;7mM-B(B[m Backup File[K[54;2H(B[0;7mC(B[m Cancel[16G           (B[0;7mM-M(B[m Mac Format            (B[0;7mM-P(B[m Prepend[15X[54;79H(B[0;7m^T(B[m To Files[K[52d(B[0;7mFile Name to Write: impapp.py                                                                             [52;1H(B[m[52;30H[?12l[?25h[?25l[K[1;105H[1;97H(B[0;7m        (B[m[52;45H(B[0;7m[ Wrote 30 lines ](B[m[53;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54;2H(B[0;7mX(B[m Exit  [16G(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[29;38H[?12l[?25h[?25l[C[?12l[?25h[?25l[52d[J[54;106H[?12l[?25h[54;1H[?1049l[23;0;0t[?1l>]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py sox[Knano impapp.py [Kpython3 impapp.py 
+ * Serving Flask app "impapp" (lazy loading)
+ * Environment: production
+[31m   WARNING: This is a development server. Do not use it in a production deployment.[0m
+[2m   Use a production WSGI server instead.[0m
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 303-397-764
+127.0.0.1 - - [26/Mar/2020 16:11:53] "[37mGET / HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:12:05] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:12:22] "[35m[1mPOST /speech2text HTTP/1.0[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1866, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/impapp/impapp.py", line 26, in speech2text
+    text = r.recognize_google(audio)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/speech_recognition/__init__.py", line 858, in recognize_google
+    if not isinstance(actual_result, dict) or len(actual_result.get("alternative", [])) == 0: raise UnknownValueError()
+speech_recognition.UnknownValueError
+^C]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py 
+[?1049h[22;0;0t[1;54r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[52;46H(B[0;7m[ Reading File ](B[m[52;45H(B[0;7m[ Read 30 lines ](B[m[H(B[0;7m  GNU nano 2.9.3                                   impapp.py                                              [1;105H(B[m[53d(B[0;7m^G(B[m Get Help    (B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54d(B[0;7m^X(B[m Exit[54;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[3d(B[0;1m[36mimport[39m(B[m os[4d(B[0;1m[36mimport[39m(B[m speech_recognition (B[0;1m[36mas[39m(B[m sr[5d(B[0;1m[36mfrom[39m(B[m flask (B[0;1m[36mimport[39m(B[m Flask, render_template, request[7dapp = Flask(__name__)[9d@app.route((B[0;1m[32m'/'[39m(B[m)[10d@app.route((B[0;1m[32m'/index.html'[39m(B[m)[11d(B[0;1m[36mdef[34m index[39m(B[m():[12;5H(B[0;1m[36mreturn[39m(B[m render_template((B[0;1m[32m'index.html'[39m(B[m)[14d@app.route((B[0;1m[32m'/speech2text'[39m(B[m, methods=[(B[0;1m[32m'POST'[39m(B[m])[15d(B[0;1m[36mdef[34m speech2text[39m(B[m():[16;5Hr = sr.Recognizer()[18;5Haudio = request.get_data()[20;5H(B[0;1m[36mwith[39m(B[m open((B[0;1m[32m'tempo.ogg'[39m(B[m, mode=(B[0;1m[32m'bx'[39m(B[m) (B[0;1m[36mas[39m(B[m f:[21;9Hf.write(audio)[23;5Hos.system((B[0;1m[32m'opusdec --force-wav tempo.ogg - | sox - tempo.wav'[39m(B[m)[24;5Haudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[25;5H(B[0;1m[36mwith[39m(B[m audiofile (B[0;1m[36mas[39m(B[m source:[26;9Haudio = r.record(source)[28;5Htext = r.recognize_google(audio)[29;5Hos.system((B[0;1m[32m'rm tempo.ogg tempo.wav'[39m(B[m)[30;5H(B[0;1m[36mreturn[39m(B[m text[32dapp.run(host=(B[0;1m[32m'0.0.0.0'[39m(B[m,debug=(B[0;1m[35mTrue[39m(B[m)[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[19d[?12l[?25h[?25l[20d[?12l[?25h[?25l[21d[?12l[?25h[?25l[22d[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[25d[?12l[?25h[?25l[26d[?12l[?25h[?25l[27d[?12l[?25h[?25l[28d[?12l[?25h[?25l[52d[K[29d[?12l[?25h[?25l[30d[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[1;97H(B[0;7mModified(B[m[27;52r[27;1HM[1;54r[28;1H[?12l[?25h[?25l[27;52r[52;1H
+[1;54r[27;1H[?12l[?25h[?25l7[27;52r8M[1;54r[28;1H[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l    t[?12l[?25h[?25lr[?12l[?25h[?25l(B[0;1m[36mtry[39m(B[m[?12l[?25h[?25l:[?12l[?25h[?25l[29d[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l        text = r.recognize_google(audio)[29;9H[?12l[?25h[?25l[53;16H           (B[0;7mM-D(B[m DOS Format            (B[0;7mM-A(B[m Append[16X[53;79H(B[0;7mM-B(B[m Backup File[K[54;2H(B[0;7mC(B[m Cancel[16G           (B[0;7mM-M(B[m Mac Format            (B[0;7mM-P(B[m Prepend[15X[54;79H(B[0;7m^T(B[m To Files[K[52d(B[0;7mFile Name to Write: impapp.py                                                                             [52;1H(B[m[52;30H[?12l[?25h[?25l[K[1;105H[1;97H(B[0;7m        (B[m[52;45H(B[0;7m[ Wrote 31 lines ](B[m[53;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54;2H(B[0;7mX(B[m Exit  [16G(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[29;9H[?12l[?25h[?25l[52d[J[54;106H[?12l[?25h[54;1H[?1049l[23;0;0t[?1l>]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py [3@python3[C[C[C[C[C[C[C[C[C[C[C[3Pnano[C[C[C[C[C[C[C[C[C[C[C[3@python3[C[C[C[C[C[C[C[C[C[C[C[3Pnano[C[C[C[C[C[C[C[C[C[C[C
+[?1049h[22;0;0t[1;54r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[52;46H(B[0;7m[ Reading File ](B[m[52;45H(B[0;7m[ Read 31 lines ](B[m[H(B[0;7m  GNU nano 2.9.3                                   impapp.py                                              [1;105H(B[m[53d(B[0;7m^G(B[m Get Help    (B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54d(B[0;7m^X(B[m Exit[54;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[3d(B[0;1m[36mimport[39m(B[m os[4d(B[0;1m[36mimport[39m(B[m speech_recognition (B[0;1m[36mas[39m(B[m sr[5d(B[0;1m[36mfrom[39m(B[m flask (B[0;1m[36mimport[39m(B[m Flask, render_template, request[7dapp = Flask(__name__)[9d@app.route((B[0;1m[32m'/'[39m(B[m)[10d@app.route((B[0;1m[32m'/index.html'[39m(B[m)[11d(B[0;1m[36mdef[34m index[39m(B[m():[12;5H(B[0;1m[36mreturn[39m(B[m render_template((B[0;1m[32m'index.html'[39m(B[m)[14d@app.route((B[0;1m[32m'/speech2text'[39m(B[m, methods=[(B[0;1m[32m'POST'[39m(B[m])[15d(B[0;1m[36mdef[34m speech2text[39m(B[m():[16;5Hr = sr.Recognizer()[18;5Haudio = request.get_data()[20;5H(B[0;1m[36mwith[39m(B[m open((B[0;1m[32m'tempo.ogg'[39m(B[m, mode=(B[0;1m[32m'bx'[39m(B[m) (B[0;1m[36mas[39m(B[m f:[21;9Hf.write(audio)[23;5Hos.system((B[0;1m[32m'opusdec --force-wav tempo.ogg - | sox - tempo.wav'[39m(B[m)[24;5Haudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[25;5H(B[0;1m[36mwith[39m(B[m audiofile (B[0;1m[36mas[39m(B[m source:[26;9Haudio = r.record(source)[28;5H(B[0;1m[36mtry[39m(B[m:[29dtext = r.recognize_google(audio)[30;5Hos.system((B[0;1m[32m'rm tempo.ogg tempo.wav'[39m(B[m)[31;5H(B[0;1m[36mreturn[39m(B[m text[33dapp.run(host=(B[0;1m[32m'0.0.0.0'[39m(B[m,debug=(B[0;1m[35mTrue[39m(B[m)[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[19d[?12l[?25h[?25l[20d[?12l[?25h[?25l[21d[?12l[?25h[?25l[22d[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[26d[?12l[?25h[?25l[27d[?12l[?25h[?25l[28d[?12l[?25h[?25l[52d[K[29d[?12l[?25h[?25l[30d[?12l[?25h[?25l[1;97H(B[0;7mModified(B[m[30;52r[30;1HM[1;54r[31;1H[?12l[?25h[?25l[A[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l    e[?12l[?25h[?25lx[?12l[?25h[?25lc[?12l[?25h[?25le[?12l[?25h[?25lp[?12l[?25h[?25l[5G(B[0;1m[36mexcept[39m(B[m[?12l[?25h[?25l:[?12l[?25h[?25l7[31;52r8[31dM[1;54r[31;1H[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l[1K t[?12l[?25h[?25le[?12l[?25h[?25lx[?12l[?25h[?25lt[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l =[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l "[?12l[?25h[?25l"[?12l[?25h[?25l[?12l[?25h[?25l(B[0;1m[32m"C"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mo"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mu"[39m(B[m[?12l[?25h[?25l(B[0;1m[32ml"[39m(B[m[?12l[?25h[?25l(B[0;1m[32md"[39m(B[m[?12l[?25h[?25l(B[0;1m[32m "[39m(B[m[?12l[?25h[?25l(B[0;1m[32mn"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mo"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mt proce"[39m(B[m[?12l[?25h[?25l(B[0;1m[32ms"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mss"[39m(B[m[?12l[?25h[?25l(B[0;1m[32m "[39m(B[m[?12l[?25h[?25l(B[0;1m[32mq"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mu"[39m(B[m[?12l[?25h[?25l(B[0;1m[32me"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mr"[39m(B[m[?12l[?25h[?25l(B[0;1m[32my"[39m(B[m[?12l[?25h[?25l(B[0;1m[32m."[39m(B[m[?12l[?25h[?25l[32d[?12l[?25h[?25l[33d[?12l[?25h[?25l[32;40H[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[53;16H           (B[0;7mM-D(B[m DOS Format            (B[0;7mM-A(B[m Append[16X[53;79H(B[0;7mM-B(B[m Backup File[K[54;2H(B[0;7mC(B[m Cancel[16G           (B[0;7mM-M(B[m Mac Format            (B[0;7mM-P(B[m Prepend[15X[54;79H(B[0;7m^T(B[m To Files[K[52d(B[0;7mFile Name to Write: impapp.py                                                                             [52;1H(B[m[52;30H[?12l[?25h[?25l[K[1;105H[1;97H(B[0;7m        (B[m[52;45H(B[0;7m[ Wrote 33 lines ](B[m[53;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54;2H(B[0;7mX(B[m Exit  [16G(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[32;6H[?12l[?25h[?25l[52d[J[54;106H[?12l[?25h[54;1H[?1049l[23;0;0t[?1l>]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py [3@python3[C[C[C[C[C[C[C[C[C[C[C
+ * Serving Flask app "impapp" (lazy loading)
+ * Environment: production
+[31m   WARNING: This is a development server. Do not use it in a production deployment.[0m
+[2m   Use a production WSGI server instead.[0m
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 303-397-764
+127.0.0.1 - - [26/Mar/2020 16:13:35] "[37mGET / HTTP/1.0[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 16:13:46] "[35m[1mPOST /speech2text HTTP/1.0[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1866, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/impapp/impapp.py", line 18, in speech2text
+    with open('tempo.ogg', mode='bx') as f:
+FileExistsError: [Errno 17] File exists: 'tempo.ogg'
+^C]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ python3 impapp.py [3Pnano[C[C[C[C[C[C[C[C[C[C[C[3@python3[C[C[C[C[C[C[C[C[C[C[C[Krm tempo.ogg
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ rm tempo.ogg[K[K[Kwav
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ rm tempo.wavoggpython3 impapp.py [3Pnano[C[C[C[C[C[C[C[C[C[C[C[3@python3[C[C[C[C[C[C[C[C[C[C[C
+ * Serving Flask app "impapp" (lazy loading)
+ * Environment: production
+[31m   WARNING: This is a development server. Do not use it in a production deployment.[0m
+[2m   Use a production WSGI server instead.[0m
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 303-397-764
+127.0.0.1 - - [26/Mar/2020 16:14:13] "[37mGET / HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:14:24] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:14:34] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:14:51] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:15:03] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:15:15] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+^C]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ python3 impapp.py 
+ * Serving Flask app "impapp" (lazy loading)
+ * Environment: production
+[31m   WARNING: This is a development server. Do not use it in a production deployment.[0m
+[2m   Use a production WSGI server instead.[0m
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 303-397-764
+127.0.0.1 - - [26/Mar/2020 16:18:05] "[37mGET / HTTP/1.0[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 16:18:05] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+Decoding complete.        
+This doesn't look like a Opus file
+sox FAIL formats: can't determine type of  `-'
+127.0.0.1 - - [26/Mar/2020 16:18:15] "[35m[1mPOST /speech2text HTTP/1.0[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1866, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/impapp/impapp.py", line 23, in speech2text
+    with audiofile as source:
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/speech_recognition/__init__.py", line 203, in __enter__
+    self.audio_reader = wave.open(self.filename_or_fileobject, "rb")
+  File "/usr/lib/python3.6/wave.py", line 499, in open
+    return Wave_read(f)
+  File "/usr/lib/python3.6/wave.py", line 159, in __init__
+    f = builtins.open(f, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: 'tempo.wav'
+127.0.0.1 - - [26/Mar/2020 16:19:15] "[37mGET / HTTP/1.0[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 16:19:29] "[37mGET / HTTP/1.0[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 16:19:30] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [26/Mar/2020 16:19:39] "[35m[1mPOST /speech2text HTTP/1.0[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1866, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/impapp/impapp.py", line 18, in speech2text
+    with open('tempo.ogg', mode='bx') as f:
+FileExistsError: [Errno 17] File exists: 'tempo.ogg'
+^C]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ python3 impapp.py [Krm tempo.ogg
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ rm temo[Kpo.wav
+rm: cannot remove 'tempo.wav': No such file or directory
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ rm tempo.wavoggpython3 impapp.py 
+ * Serving Flask app "impapp" (lazy loading)
+ * Environment: production
+[31m   WARNING: This is a development server. Do not use it in a production deployment.[0m
+[2m   Use a production WSGI server instead.[0m
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 303-397-764
+Decoding complete.        
+This doesn't look like a Opus file
+sox FAIL formats: can't determine type of  `-'
+127.0.0.1 - - [26/Mar/2020 16:20:31] "[35m[1mPOST /speech2text HTTP/1.0[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2463, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2449, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1866, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1820, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1935, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/impapp/impapp.py", line 23, in speech2text
+    with audiofile as source:
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/speech_recognition/__init__.py", line 203, in __enter__
+    self.audio_reader = wave.open(self.filename_or_fileobject, "rb")
+  File "/usr/lib/python3.6/wave.py", line 499, in open
+    return Wave_read(f)
+  File "/usr/lib/python3.6/wave.py", line 159, in __init__
+    f = builtins.open(f, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: 'tempo.wav'
+^C]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ rm tempo.ogg
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py 
+[?1049h[22;0;0t[1;54r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[52;46H(B[0;7m[ Reading File ](B[m[52;45H(B[0;7m[ Read 33 lines ](B[m[H(B[0;7m  GNU nano 2.9.3                                   impapp.py                                              [1;105H(B[m[53d(B[0;7m^G(B[m Get Help    (B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54d(B[0;7m^X(B[m Exit[54;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[3d(B[0;1m[36mimport[39m(B[m os[4d(B[0;1m[36mimport[39m(B[m speech_recognition (B[0;1m[36mas[39m(B[m sr[5d(B[0;1m[36mfrom[39m(B[m flask (B[0;1m[36mimport[39m(B[m Flask, render_template, request[7dapp = Flask(__name__)[9d@app.route((B[0;1m[32m'/'[39m(B[m)[10d@app.route((B[0;1m[32m'/index.html'[39m(B[m)[11d(B[0;1m[36mdef[34m index[39m(B[m():[12;5H(B[0;1m[36mreturn[39m(B[m render_template((B[0;1m[32m'index.html'[39m(B[m)[14d@app.route((B[0;1m[32m'/speech2text'[39m(B[m, methods=[(B[0;1m[32m'POST'[39m(B[m])[15d(B[0;1m[36mdef[34m speech2text[39m(B[m():[16;5Hr = sr.Recognizer()[18;5Haudio = request.get_data()[20;5H(B[0;1m[36mwith[39m(B[m open((B[0;1m[32m'tempo.ogg'[39m(B[m, mode=(B[0;1m[32m'bx'[39m(B[m) (B[0;1m[36mas[39m(B[m f:[21;9Hf.write(audio)[23;5Hos.system((B[0;1m[32m'opusdec --force-wav tempo.ogg - | sox - tempo.wav'[39m(B[m)[24;5Haudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[25;5H(B[0;1m[36mwith[39m(B[m audiofile (B[0;1m[36mas[39m(B[m source:[26;9Haudio = r.record(source)[28;5H(B[0;1m[36mtry[39m(B[m:[29dtext = r.recognize_google(audio)[30;5H(B[0;1m[36mexcept[39m(B[m:[31;9Htext = (B[0;1m[32m"Could not process query."[32;5H[39m(B[mos.system((B[0;1m[32m'rm tempo.ogg tempo.wav'[39m(B[m)[33;5H(B[0;1m[36mreturn[39m(B[m text[35dapp.run(host=(B[0;1m[32m'0.0.0.0'[39m(B[m,debug=(B[0;1m[35mTrue[39m(B[m)[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[19d[?12l[?25h[?25l[20d[?12l[?25h[?25l[21d[?12l[?25h[?25l[22d[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[1;97H(B[0;7mModified[52d(B[m[K[1;105H[24;52r[24;1HM[1;54r[25;1H[?12l[?25h[?25l[A[?12l[?25h[?25l[53;16H           (B[0;7mM-D(B[m DOS Format            (B[0;7mM-A(B[m Append[16X[53;79H(B[0;7mM-B(B[m Backup File[K[54;2H(B[0;7mC(B[m Cancel[16G           (B[0;7mM-M(B[m Mac Format            (B[0;7mM-P(B[m Prepend[15X[54;79H(B[0;7m^T(B[m To Files[K[52d(B[0;7mFile Name to Write: impapp.py                                                                             [52;1H(B[m[52;30H[?12l[?25h[?25l[K[1;105H[1;97H(B[0;7m        (B[m[52;45H(B[0;7m[ Wrote 34 lines ](B[m[53;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54;2H(B[0;7mX(B[m Exit  [16G(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[24d[?12l[?25h[?25l[52d[J[54;106H[?12l[?25h[54;1H[?1049l[23;0;0t[?1l>]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py 
+[?1049h[22;0;0t[1;54r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[52;46H(B[0;7m[ Reading File ](B[m[52;45H(B[0;7m[ Read 34 lines ](B[m[H(B[0;7m  GNU nano 2.9.3                                   impapp.py                                              [1;105H(B[m[53d(B[0;7m^G(B[m Get Help    (B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54d(B[0;7m^X(B[m Exit[54;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[3d(B[0;1m[36mimport[39m(B[m os[4d(B[0;1m[36mimport[39m(B[m speech_recognition (B[0;1m[36mas[39m(B[m sr[5d(B[0;1m[36mfrom[39m(B[m flask (B[0;1m[36mimport[39m(B[m Flask, render_template, request[7dapp = Flask(__name__)[9d@app.route((B[0;1m[32m'/'[39m(B[m)[10d@app.route((B[0;1m[32m'/index.html'[39m(B[m)[11d(B[0;1m[36mdef[34m index[39m(B[m():[12;5H(B[0;1m[36mreturn[39m(B[m render_template((B[0;1m[32m'index.html'[39m(B[m)[14d@app.route((B[0;1m[32m'/speech2text'[39m(B[m, methods=[(B[0;1m[32m'POST'[39m(B[m])[15d(B[0;1m[36mdef[34m speech2text[39m(B[m():[16;5Hr = sr.Recognizer()[18;5Haudio = request.get_data()[20;5H(B[0;1m[36mwith[39m(B[m open((B[0;1m[32m'tempo.ogg'[39m(B[m, mode=(B[0;1m[32m'bx'[39m(B[m) (B[0;1m[36mas[39m(B[m f:[21;9Hf.write(audio)[23;5Hos.system((B[0;1m[32m'opusdec --force-wav tempo.ogg - | sox - tempo.wav'[39m(B[m)[25;5Haudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[26;5H(B[0;1m[36mwith[39m(B[m audiofile (B[0;1m[36mas[39m(B[m source:[27;9Haudio = r.record(source)[29;5H(B[0;1m[36mtry[39m(B[m:[30dtext = r.recognize_google(audio)[31;5H(B[0;1m[36mexcept[39m(B[m:[32;9Htext = (B[0;1m[32m"Could not process query."[33;5H[39m(B[mos.system((B[0;1m[32m'rm tempo.ogg tempo.wav'[39m(B[m)[34;5H(B[0;1m[36mreturn[39m(B[m text[36dapp.run(host=(B[0;1m[32m'0.0.0.0'[39m(B[m,debug=(B[0;1m[35mTrue[39m(B[m)[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[19d[?12l[?25h[?25l[20d[?12l[?25h[?25l[21d[?12l[?25h[?25l[22d[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[25d[?12l[?25h[?25l[26d[?12l[?25h[?25l[27d[?12l[?25h[?25l[A[?12l[?25h[?25l[52d[K[25d[?12l[?25h[?25l[A[?12l[?25h[?25l[25d[?12l[?25h[?25l[1;97H(B[0;7mModified(B[m[24;52r[52;1H
+[1;54r[24;1H[?12l[?25h[?25l7[24;52r8M[1;54r[25;1H[?12l[?25h[?25l    [?12l[?25h[?25ltaudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[6G[?12l[?25h[?25lraudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[7G[?12l[?25h[?25lyaudiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[8G[?12l[?25h[?25l(B[0;1m[36mtry[39m(B[m:audiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[25;9H[?12l[?25h[?25l[24;52r[24;1HM[1;54r[25;5H(B[0;1m[36mtry[39m(B[m:[26d[8P[?12l[?25h[?25l    audiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[5G[?12l[?25h[?25l        audiofile = sr.AudioFile((B[0;1m[32m'tempo.wav'[39m(B[m)[26;9H[?12l[?25h[?25l[27d[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l7[27;52r8M[1;54r[27;1H[42m    [28d[49m(B[m[4P[?12l[?25h[?25l[A[?12l[?25h[?25l[28d[?12l[?25h[?25l    (B[0;1m[36mwith[39m(B[m audiofile (B[0;1m[36mas[39m(B[m source:[5G[?12l[?25h[?25l[A[?12l[?25h[?25l    e[?12l[?25h[?25lx[?12l[?25h[?25lc[?12l[?25h[?25le[?12l[?25h[?25lp[?12l[?25h[?25l[5G(B[0;1m[36mexcept[39m(B[m[?12l[?25h[?25l:[?12l[?25h[?25l7[28;52r8[28dM[1;54r[28;1H[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l[1K o[?12l[?25h[?25ls[?12l[?25h[?25l.[?12l[?25h[?25ls[?12l[?25h[?25ly[?12l[?25h[?25ls[?12l[?25h[?25lt[?12l[?25h[?25le[?12l[?25h[?25lm[?12l[?25h[?25l([?12l[?25h[?25l)[?12l[?25h[?25l[?12l[?25h[?25l')[?12l[?25h[?25l'')[?12l[?25h[?25l[?12l[?25h[?25l(B[0;1m[32m'r'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mm'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32m '[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mt'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32me'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mm'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mp'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mo'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32m.'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mo'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mg'[39m(B[m)[?12l[?25h[?25l(B[0;1m[32mgg'[39m(B[m)[?12l[?25h[?25l[C[?12l[?25h[?25l)[?12l[?25h[?25l7[29;52r8[29dM[1;54r[29;1H[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l[42m    [49m(B[m[?12l[?25h[?25l[1K r[?12l[?25h[?25le[?12l[?25h[?25lt[?12l[?25h[?25lu[?12l[?25h[?25lr[?12l[?25h[?25l[9G(B[0;1m[36mreturn[39m(B[m[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l t[?12l[?25h[?25le[?12l[?25h[?25lx[?12l[?25h[?25lt[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l "[?12l[?25h[?25l"[?12l[?25h[?25l[?12l[?25h[?25l(B[0;1m[32m"C"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mo"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mu"[39m(B[m[?12l[?25h[?25l(B[0;1m[32ml"[39m(B[m[?12l[?25h[?25l(B[0;1m[32m "[39m(B[m[?12l[?25h[?25l(B[0;1m[32m"[39m(B[m[K[?12l[?25h[?25l(B[0;1m[32md"[39m(B[m[?12l[?25h[?25l(B[0;1m[32m "[39m(B[m[?12l[?25h[?25l(B[0;1m[32mn"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mo"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mt"[39m(B[m[?12l[?25h[?25l(B[0;1m[32m "[39m(B[m[?12l[?25h[?25l(B[0;1m[32mp"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mr"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mo"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mc"[39m(B[m[?12l[?25h[?25l(B[0;1m[32me"[39m(B[m[?12l[?25h[?25l(B[0;1m[32ms"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mss"[39m(B[m[?12l[?25h[?25l(B[0;1m[32m "[39m(B[m[?12l[?25h[?25l(B[0;1m[32mq"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mu"[39m(B[m[?12l[?25h[?25l(B[0;1m[32me"[39m(B[m[?12l[?25h[?25l(B[0;1m[32mr"[39m(B[m[?12l[?25h[?25l(B[0;1m[32my"[39m(B[m[?12l[?25h[?25l[53;16H           (B[0;7mM-D(B[m DOS Format            (B[0;7mM-A(B[m Append[16X[53;79H(B[0;7mM-B(B[m Backup File[K[54;2H(B[0;7mC(B[m Cancel[16G           (B[0;7mM-M(B[m Mac Format            (B[0;7mM-P(B[m Prepend[15X[54;79H(B[0;7m^T(B[m To Files[K[52d(B[0;7mFile Name to Write: impapp.py                                                                             [52;1H(B[m[52;30H[?12l[?25h[?25l[K[1;105H[1;97H(B[0;7m        (B[m[52;45H(B[0;7m[ Wrote 38 lines ](B[m[53;16H(B[0;7m^O(B[m Write Out   (B[0;7m^W(B[m Where Is    (B[0;7m^K(B[m Cut Text    (B[0;7m^J(B[m Justify     (B[0;7m^C(B[m Cur Pos     (B[0;7mM-U(B[m Undo[54;2H(B[0;7mX(B[m Exit  [16G(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Uncut Text  (B[0;7m^T(B[m To Linter   (B[0;7m^_(B[m Go To Line  (B[0;7mM-E(B[m Redo[52d[29;40H[?12l[?25h[?25l[52d[J[54;106H[?12l[?25h[54;1H[?1049l[23;0;0t[?1l>]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-l[?25h[?25l[52d[J[54;106H[?12l[?25h[54;1H[?1049l[23;0;0t[?1l>]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ nano impapp.py [3Prm tempo.oggnano impapp.py [Kpython3 impapp.py 
+ * Serving Flask app "impapp" (lazy loading)
+ * Environment: production
+[31m   WARNING: This is a development server. Do not use it in a production deployment.[0m
+[2m   Use a production WSGI server instead.[0m
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 303-397-764
+127.0.0.1 - - [26/Mar/2020 16:23:36] "[37mGET / HTTP/1.0[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 16:24:19] "[37mGET / HTTP/1.0[0m" 200 -
+Decoding to 48000 Hz (1 channel)
+Encoded with libopus unknown-fixed
+ENCODER=Mozilla68.6.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:24:33] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 16:26:06] "[37mGET / HTTP/1.0[0m" 200 -
+127.0.0.1 - - [26/Mar/2020 16:26:07] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:26:25] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:26:34] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+Decoding to 44100 Hz (2 channels)
+Encoded with libopus unknown
+ENCODER=Mozilla74.0
+[|] 00:00:01[/] 00:00:02[-] 00:00:03[\] 00:00:04Decoding complete.        
+Cannot seek on wav file output, wav size chunk will be incorrect
+sox WARN wav: Premature EOF on .wav input file
+127.0.0.1 - - [26/Mar/2020 16:27:57] "[37mPOST /speech2text HTTP/1.0[0m" 200 -
+^C]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ exit
+Script done, file is typescript
+]0;ubuntu@ip-172-31-93-12: ~/impapp[01;32mubuntu@ip-172-31-93-12[00m:[01;34m~/impapp[00m$ exit
+
+Script done on 2020-03-26 17:29:29+0000

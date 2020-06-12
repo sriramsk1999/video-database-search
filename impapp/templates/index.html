@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>IMPAPP</title>
+    </head>
+    <body>
+        <h1>Hello, World</h1>
+        <button type="button" class="record">Record</button>
+		<div id="result"></div>
+    </body>
+	<script>
+		const record = document.querySelector('.record');
+
+		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+		   console.log('getUserMedia supported.');
+		   navigator.mediaDevices.getUserMedia (
+		      // constraints - only audio needed for this app
+		      {
+		         audio: true,
+				 mimeType: 'audio/wav'
+		      })
+
+		      // Success callback
+		      .then(function(stream) {
+					const mediaRecorder = new MediaRecorder(stream);
+
+					record.onclick = function() {
+					  setTimeout(() => mediaRecorder.stop(),5000);
+					  mediaRecorder.start();
+					  console.log("recorder started");
+					  record.style.background = "red";
+					  record.style.color = "black";
+					}
+
+					let chunks = [];
+
+					mediaRecorder.ondataavailable = e => chunks.push(e.data);
+
+					mediaRecorder.onstop = function(e) {
+					  record.style.background = "";
+					  record.style.color = "";
+					  console.log("recorder stopped");
+					  const blob = new Blob(chunks, { 'type' : 'audio/wav' });
+
+					  var xhttp = new XMLHttpRequest();
+	   				  xhttp.onreadystatechange = function() {
+						    if (this.readyState == 4 && this.status == 200) {
+						       document.getElementById("result").innerHTML = xhttp.responseText;
+						    }
+						};
+					  xhttp.open("POST", "/speech2text", true);
+					  
+					  xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					  xhttp.send(blob); 
+					  
+					  chunks = [];
+					}
+		      })
+
+		      // Error callback
+		      .catch(function(err) {
+		         console.log('The following getUserMedia error occured: ' + err);
+		      }
+		   );
+		} else {
+		   console.log('getUserMedia not supported on your browser!');
+		}
+
+	</script>
+</html>
+
+
+
+<!--
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04#step-5-%E2%80%94-configuring-nginx-to-proxy-requests
+https://stackoverflow.com/questions/21015847/how-to-make-getusermedia-work-on-all-browsers
+https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
+-->
