@@ -25,7 +25,9 @@ train2017 - images
 
 #### Video Captioning
 
-download videos -> ?
+verify_dataset.py -> Verified the links provided in the dataset and saved the new verified links in a new json file
+
+download_dataset.py -> Downloaded dataset from these verified links
 
 detect_scene.py - splits a video into a series of chunks
 
