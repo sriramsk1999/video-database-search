@@ -1,11 +1,102 @@
 <html>
     <head>
         <title>IMPAPP</title>
+		<style>
+		.gradbg {
+			background: linear-gradient(90deg, #1CB5E0 0%, #000851 100%);
+		}	
+		.banner{
+			position:absolute;
+			left:40%;
+			top:25%;
+			color:white;
+			font-size:40px;
+			font-family:serif;
+			padding: 25px;
+			margin-left:45px;
+		}
+		.record{
+			padding:30px;
+			margin-top:25%;
+			margin-left:47.5%;
+			border-radius:50%;
+		}
+		.record:hover{
+			background-color:white;
+		}
+		#result{
+			text-align:center;
+			color:white;
+			font-size:serif;
+			font-size:30px;
+			padding:25px;
+		}
+		.arrow{
+			display:none;
+			color:white;
+			margin-left:49%;
+			margin-top:5%;
+		}
+
+		#v1{
+			margin-left:36%;
+			margin-right:20%;
+		}
+		#v2{
+			margin-left:15%;
+			margin-right:15%;
+		}
+		#v3{			
+			padding-bottom:0px;
+		}
+		#videobox{
+			margin-top:75px;
+			display:none;
+		}
+		.caption {
+			max-width:25%;
+			text-align:center;
+			color:white;
+			font-size:serif;
+			font-size:20px;		
+		}
+		#c1 {
+			margin: 0 auto;
+			margin-bottom:75px;
+		}
+		#c2 {
+			width:20%;
+			margin-left:15%;
+			margin-right:15%;
+		}
+		#c3 {
+			width:20%;
+		}
+		</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href=  "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  
     </head>
-    <body>
-        <h1>Hello, World</h1>
-        <button type="button" class="record">Record</button>
+    <body class="gradbg">
+        <div class="banner">Hello, World</div>
+    	<button type="button" class="record"><i class="fa fa-microphone fa-5x"></i></button>
+
 		<div id="result"></div>
+		<div class="arrow" onclick="scrollDown()"><i class="fa fa-angle-double-down fa-5x"></i></div>
+		<div id="videobox">
+			<video id="v1" width="500" height="320" autoplay loop>
+			</video> 
+			<div class="caption" id="c1"></div>
+			
+			<video id="v2" width="500" height="320" autoplay loop>
+			</video> 
+			
+			<video id="v3" width="500" height="320" autoplay loop>
+			</video> 
+
+			<div class="caption" id="c2" style="display:inline"></div>
+			<div class="caption" id="c3" style="display:inline"></div>
+		</div>
+		<div class="arrow" onclick="scrollUp()"><i class="fa fa-angle-double-up fa-5x"></i></div>
     </body>
 	<script>
 		const record = document.querySelector('.record');
@@ -27,7 +118,7 @@
 					  setTimeout(() => mediaRecorder.stop(),5000);
 					  mediaRecorder.start();
 					  console.log("recorder started");
-					  record.style.background = "red";
+					  record.style.background = "green";
 					  record.style.color = "black";
 					}
 
@@ -44,7 +135,12 @@
 					  var xhttp = new XMLHttpRequest();
 	   				  xhttp.onreadystatechange = function() {
 						    if (this.readyState == 4 && this.status == 200) {
-						       document.getElementById("result").innerHTML = xhttp.responseText;
+						       	response = xhttp.responseText;
+								Response = response.charAt(0).toUpperCase() + response.slice(1);
+								document.getElementById("result").innerHTML = '"' + Response + '"';
+								if(response !== "Could not process query") {
+									fetchVideos(response);
+								}
 						    }
 						};
 					  xhttp.open("POST", "/speech2text", true);
@@ -65,16 +161,45 @@
 		   console.log('getUserMedia not supported on your browser!');
 		}
 
+		function fetchVideos(text) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+						jsonOb = JSON.parse(xhttp.responseText);
+						console.log(jsonOb);
+						
+						// if arrows and videobox are invisible, make them visible
+						document.getElementById('videobox').style.display = 'block';
+						arrows = document.getElementsByClassName('arrow');
+						arrows[0].style.display = 'block';
+						arrows[1].style.display = 'block';
+
+						v1 = document.getElementById('v1');
+						v1.src = jsonOb['first'][0];
+						document.getElementById('c1').innerText =  jsonOb['first'][1];
+
+						v2 = document.getElementById('v2');
+						v2.src = jsonOb['second'][0];
+						document.getElementById('c2').innerText =  jsonOb['second'][1];
+
+						v3 = document.getElementById('v3');
+						v3.src = jsonOb['third'][0];
+						document.getElementById('c3').innerText =  jsonOb['third'][1];
+
+					}
+			};
+			xhttp.open("GET", "/proc_query?query="+text, true);
+			xhttp.send(); 
+		}
+
+		function scrollDown(){
+				arrowup = document.getElementsByClassName("arrow")[1];
+				arrowup.scrollIntoView({ behavior: 'smooth', block: 'end'});
+		}
+
+		function scrollUp(){
+				arrowdown = document.getElementsByClassName("arrow")[0];
+				arrowdown.scrollIntoView({ behavior: 'smooth', block: 'end'});
+		}
 	</script>
 </html>
-
-
-
-<!--
-
-https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
-https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04#step-5-%E2%80%94-configuring-nginx-to-proxy-requests
-https://stackoverflow.com/questions/21015847/how-to-make-getusermedia-work-on-all-browsers
-https://developer.mozilla.org/en-US/docs/Web/API/MediaStream_Recording_API/Using_the_MediaStream_Recording_API
-https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
--->
