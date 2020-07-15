@@ -4,6 +4,7 @@ from collections import OrderedDict
 import speech_recognition as sr
 import json
 from flask import Flask, render_template, request, jsonify, send_from_directory
+import subprocess
 
 app = Flask(__name__)
 
@@ -23,14 +24,19 @@ def speech2text():
 	with open('tempo.ogg', mode='bx') as f:
 		f.write(audio)
 
-	os.system('opusdec --force-wav tempo.ogg - | sox - tempo.wav')
+	# os.system('opusdec --force-wav tempo.ogg - | sox - tempo.wav')
+	with open(os.devnull, 'w') as FNULL:
+		cmd = ["ffmpeg", "-i", "tempo.ogg", "tempo.wav"]
+		code = subprocess.check_call(" ".join(cmd), shell=True, stdout=FNULL, stderr=subprocess.STDOUT)
 
 	try:
 		audiofile = sr.AudioFile('tempo.wav')
 		with audiofile as source:
 			audio = r.record(source)
-	except:
-		os.system('rm tempo.ogg')
+
+	except Exception as e:
+		print("Error:", e)
+		os.system("rm tempo.ogg")
 		return "Could not process query"
 
 	try:
